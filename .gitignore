@@ -1,2 +1,5 @@
-.venv*
-raw*
+.venv/
+.cache/
+dados/raw/
+__pycache__/
+.ipynb_checkpoints/
