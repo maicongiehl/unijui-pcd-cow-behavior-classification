@@ -1,6 +1,6 @@
 ,Acurácia,F1 macro
-Chute (sempre deitada),0.511,0.225
-RF original,0.773,0.742
-RF + passado,0.824,0.801
-RF + dois lados,0.841,0.819
-HGB + dois lados,0.846,0.825
+Chute (sempre deitada),0.536,0.233
+RF original,0.814,0.79
+RF + passado,0.853,0.838
+RF + dois lados,0.87,0.857
+HGB + dois lados,0.871,0.858
