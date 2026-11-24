@@ -3,3 +3,4 @@
 dados/raw/
 __pycache__/
 .ipynb_checkpoints/
+out/
