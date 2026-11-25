@@ -29,19 +29,16 @@ Na análise exploratória vimos que:
 - alimentação tem desvio padrão da magnitude (mag_std) maior, por causa do movimento da cabeça
 - em pé/andando se mistura com as outras classes, e é a mais difícil de acertar
 
-Na modelagem começamos com um Random Forest e divisão aleatória 70/30, que deu 86%. Esse número é otimista, porque janelas vizinhas da mesma vaca ficam no treino e no teste. Por isso passamos a treinar com 8 vacas (56.995 janelas) e testar em 2 que o modelo nunca viu, T09 e T10 (14.249 janelas).
+Na modelagem usamos um Random Forest. Para a avaliação ser honesta, treinamos com 8 vacas (56.995 janelas) e testamos em 2 que o modelo nunca viu, T09 e T10 (14.249 janelas). Uma divisão aleatória das janelas daria um número otimista, porque janelas vizinhas da mesma vaca ficariam no treino e no teste.
 
-Como os comportamentos duram minutos, também testamos usar atributos das janelas vizinhas. Com a janela atual são 16 atributos, com as 2 janelas anteriores são 32, e com 2 antes e 2 depois são 48. A versão com passado serve para monitorar em tempo real, e a com os dois lados só para dados já gravados.
+Como os comportamentos duram minutos, também testamos usar atributos das janelas vizinhas. Com a janela atual são 16 atributos, e com 2 antes e 2 depois são 48. A versão com os dois lados usa janelas futuras, então só serve para dados já gravados.
 
 Nesse teste mais honesto comparamos:
 - chute, sempre prever deitada: 54% de acurácia, F1 macro 0,233
 - Random Forest com os 16 atributos: 81%, F1 macro 0,790
-- Random Forest com as 2 janelas anteriores: 85%, F1 macro 0,838
 - Random Forest com 2 janelas antes e 2 depois: 87%, F1 macro 0,857
-- HistGradientBoosting com o mesmo contexto: 87%, F1 macro 0,858
-- GradientBoosting com o mesmo contexto: 87%, F1 macro 0,857
 
-Usar as janelas vizinhas foi o que mais ajudou. Trocar o algoritmo quase não mudou nada, então ficamos com o Random Forest por ser o mais simples e rápido.
+Usar as janelas vizinhas foi o que mais ajudou.
 
 ## Resultados
 
@@ -52,7 +49,7 @@ O modelo final (Random Forest com 48 atributos) chegou a 87% de acurácia nas va
 
 Em pé/andando é a mais difícil, e 24% dessas janelas são confundidas com deitada.
 
-Limitações: o teste usa só 2 vacas, então o 87% pode mudar com outras. A versão que usa janelas futuras só serve para dados já gravados. Para monitorar em tempo real, o resultado esperado é o da versão com passado, 85%.
+Limitações: o teste usa só 2 vacas, então o 87% pode mudar com outras. A versão que usa janelas futuras só serve para dados já gravados. Para monitorar em tempo real seria preciso uma versão sem janelas futuras, que não foi avaliada aqui.
 
 ## Estrutura
 
@@ -61,7 +58,7 @@ Limitações: o teste usa só 2 vacas, então o 87% pode mudar com outras. A ver
 - inspect.ipynb: análise exploratória
 - model.ipynb: modelos e comparação de resultados
 - dados/clean: CSVs limpos, um por vaca
-- figuras: gráficos usados na análise e nos resultados, numerados de 01 a 09, mais a tabela de comparação dos modelos
+- figuras: gráficos usados na análise e nos resultados, numerados de 01 a 08, mais a tabela de comparação dos modelos
 - requirements.txt: dependências do projeto
 
 ## Como rodar
@@ -76,7 +73,7 @@ Depois abra inspect.ipynb e model.ipynb no Jupyter e rode as células em ordem. 
 
 ## Ferramentas
 
-Python, pandas, numpy, matplotlib, seaborn e scikit-learn (RandomForestClassifier, HistGradientBoostingClassifier e GradientBoostingClassifier).
+Python, pandas, numpy, matplotlib, seaborn e scikit-learn (RandomForestClassifier).
 
 ## Fonte dos dados
 

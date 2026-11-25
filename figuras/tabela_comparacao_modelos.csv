@@ -1,7 +1,4 @@
 ,Acurácia,F1 macro
 Chute (sempre deitada),0.536,0.233
 RF original,0.814,0.79
-RF + passado,0.853,0.838
 RF + dois lados,0.87,0.857
-HGB + dois lados,0.871,0.858
-GBM + dois lados,0.871,0.857
