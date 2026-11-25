@@ -1,11 +1,3 @@
-# Script DESATIVADO: o projeto usa apenas os CSVs limpos em ./dados/clean,
-# então não é necessário baixar nem descompactar os dados brutos do MmCows.
-# Para reativar, remover as aspas triplas do bloco abaixo.
-# O sensor_data.zip tem cerca de 18 GB.
-
-print("extract.py desativado: usar os CSVs limpos em ./dados/clean.")
-
-"""
 import os
 import zipfile
 
@@ -39,4 +31,3 @@ for nome in arquivos:
         zip_ref.extractall(pasta_projeto)
 
 print("Extração concluída.")
-"""
